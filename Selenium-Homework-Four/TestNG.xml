@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Selenium">
+    <test name="Selenium Tests">
+        <classes>
+            <class name="SeleniumFour.SeleniumFour">
+                <methods>
+                    <include name="testFindWidgets"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

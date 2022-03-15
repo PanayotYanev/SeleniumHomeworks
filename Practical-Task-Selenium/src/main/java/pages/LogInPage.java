@@ -3,37 +3,38 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LogInPage {
     WebDriver webDriver;
-    WebDriverWait wait;
-    WebElement username;
-    WebElement password;
-    WebElement logInKey;
 
-    private By usernameLocator = new By.ById("UserUsername");
-    private By passwordLocator = new By.ById("UserPassword");
-    private By logKeyLocator = new By.ByClassName("cus-key");
+    private final By usernameLocator = new By.ById("UserUsername");
+    private final By passwordLocator = new By.ById("UserPassword");
+    private final By logKeyLocator = new By.ByClassName("cus-key");
 
-    public LogInPage(WebDriver webDriver, WebDriverWait wait) {
+    public LogInPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        this.wait = wait;
     }
 
-    public ProductsAndCategories logIn(String username, String password){
-        populateLogInFieldsAndMoveForward(username, password);
-        return new ProductsAndCategories(webDriver, wait);
+    public DashboardPage logIn(String username, String password){
+        setUsername(username);
+        setPassword(password);
+        clickLogInKey();
+
+        return new DashboardPage(webDriver);
     }
 
-    private void populateLogInFieldsAndMoveForward(String usernamePopulate, String passwordPopulate){
-        username = webDriver.findElement(usernameLocator);
+    private void setUsername(String usernamePopulate){
+        WebElement username = webDriver.findElement(usernameLocator);
         username.sendKeys(usernamePopulate);
+    }
 
-        password = webDriver.findElement(passwordLocator);
+    private void setPassword(String passwordPopulate){
+        WebElement password = webDriver.findElement(passwordLocator);
         password.sendKeys(passwordPopulate);
+    }
 
-        logInKey = webDriver.findElement(logKeyLocator);
+    private void clickLogInKey(){
+        WebElement logInKey = webDriver.findElement(logKeyLocator);
         logInKey.click();
     }
 }
